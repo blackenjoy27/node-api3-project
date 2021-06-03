@@ -31,6 +31,7 @@ function insert(user) {
     .insert(user)
     .then(ids => {
       return getById(ids[0]);
+      
     });
 }
 

@@ -27,13 +27,13 @@ function validateUserId(req, res, next) {
 
 function validateUser(req, res, next) {
     const {name} = req.body;
-    if(!name.trim().length<=2){
+    if(!name||!name.trim()){
       next({
         message: "missing required name field",
         status:400
       })
     }else{
-      req.userName = name;
+      req.name = {name:name};
       next();
     }
   // DO YOUR MAGIC
@@ -42,13 +42,14 @@ function validateUser(req, res, next) {
 function validatePost(req, res, next) {
   // DO YOUR MAGIC
   const {text} = req.body;
-  if(!text.trim().length<=2){
+  if(!text||!text.trim()){
     next({
       message: "missing required text field",
       status:400
     })
   }else{
-    req.post = text;
+    req.text = {text:text};
+    req.body.user_id = req.user.id;
     next();
   }
 }
